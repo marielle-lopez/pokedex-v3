@@ -1,9 +1,10 @@
 import styles from "./Card.module.scss";
 
-const Card = ({ name, type }) => {
+const Card = ({ name, type, imgSrc, idAttribute }) => {
   return (
-    <div>
+    <div id={idAttribute} className={styles.container}>
       <p className={styles.name}>{name}</p>
+      <img src={imgSrc} alt={name} />
       <p className={styles.type}>{type}</p>
     </div>
   );
