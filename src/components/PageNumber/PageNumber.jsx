@@ -1,7 +1,17 @@
 import styles from "./PageNumber.module.scss";
 
-const PageNumber = ({ number }) => {
-  return <button className={styles.button}>{number}</button>;
+const PageNumber = ({ number, handlePage }) => {
+  return (
+    <button
+      id={`pageNumber${number}`}
+      className={styles.button}
+      onClick={() => {
+        handlePage(number);
+      }}
+    >
+      {number}
+    </button>
+  );
 };
 
 export default PageNumber;

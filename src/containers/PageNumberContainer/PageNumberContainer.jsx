@@ -9,12 +9,12 @@ const totalPokemonCount = await fetch(
 
 const totalPagesCount = Math.ceil(totalPokemonCount / 40);
 
-const PageNumberContainer = () => {
+const PageNumberContainer = ({ handlePage }) => {
   return (
     <div className={styles.container}>
-      {[...Array(totalPagesCount).keys()].map((number) => (
-        <PageNumber number={number + 1} />
-      ))}
+      {[...Array(totalPagesCount).keys()].map((number) => {
+        return <PageNumber number={number + 1} handlePage={handlePage} />;
+      })}
     </div>
   );
 };
