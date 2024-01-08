@@ -1,13 +1,11 @@
 import Card from "../../components/Card/Card";
 import styles from "./CardContainer.module.scss";
 
-const [totalPokemonCount, pokemonResults] = await fetch(
+const pokemonResults = await fetch(
   "https://pokeapi.co/api/v2/pokemon?offset=0&limit=40"
 )
   .then((res) => res.json())
-  .then((res) => [res.count, res.results]);
-
-const totalPageCount = Math.ceil(totalPokemonCount / 40);
+  .then((res) => res.results);
 
 const pokemonPromises = pokemonResults.map((result) =>
   fetch(result.url).then((res) => res.json())
