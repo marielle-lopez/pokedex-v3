@@ -2,7 +2,7 @@ import Card from "../../components/Card/Card";
 import styles from "./CardContainer.module.scss";
 import { useEffect, useState } from "react";
 
-const CardContainer = (page) => {
+const CardContainer = ({ pageNumber }) => {
   const [pokemon, setPokemon] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,8 +10,13 @@ const CardContainer = (page) => {
   useEffect(() => {
     async function fetchData() {
       try {
+        setLoading(true);
+        console.log("Updating...");
+
         const pokemonResults = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?offset=0&limit=40"
+          `https://pokeapi.co/api/v2/pokemon?offset=${[
+            ...Array(pageNumber).keys(),
+          ].reduce((acc, val) => (acc += 40), -40)}&limit=40`
         )
           .then((res) => res.json())
           .then((res) => res.results);
@@ -32,7 +37,7 @@ const CardContainer = (page) => {
     }
 
     fetchData();
-  }, []);
+  }, [pageNumber]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -46,6 +51,7 @@ const CardContainer = (page) => {
     <div className={styles.container}>
       {pokemon.map((entry) => (
         <Card
+          key={entry.name}
           name={entry.name}
           type={entry.types.map((type) => type.type.name)}
           imgSrc={entry.sprites["front_default"]}

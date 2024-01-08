@@ -13,7 +13,13 @@ const PageNumberContainer = ({ handlePage }) => {
   return (
     <div className={styles.container}>
       {[...Array(totalPagesCount).keys()].map((number) => {
-        return <PageNumber number={number + 1} handlePage={handlePage} />;
+        return (
+          <PageNumber
+            key={number + 1}
+            number={number + 1}
+            handlePage={handlePage}
+          />
+        );
       })}
     </div>
   );

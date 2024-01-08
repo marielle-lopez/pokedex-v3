@@ -6,7 +6,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import { useState } from "react";
 
 function App() {
-  let [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
 
   function handlePage(number) {
     setPage(number);
@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <Header />
-      <CardContainer page={page} />
+      <CardContainer pageNumber={page} />
       <PageNumberContainer handlePage={handlePage} />
       <Footer />
     </>
